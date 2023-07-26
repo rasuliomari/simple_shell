@@ -1,0 +1,176 @@
+#include "shell.h"
+
+
+/**
+ * string_compare -comparison of two strings.            
+ * @str1: The first string.
+ * @str2: The second string.
+ *
+ * Return: Negative if str1 < str2, positive if str1 > str2, zero if str1 == str2.
+ */
+int string_compare(const char *str1, const char *str2)
+{
+	while (*str1 && *str2)
+	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		str1++;
+		str2++;
+	}
+
+	if (*str1 == *str2)
+		return (0);
+	else
+		return (*str1 < *str2 ? -1 : 1);
+}
+
+/**
+ * string_concat - Concatenates two strings.         
+ * @destination: The destination buffer.
+ * @source: The source buffer.
+ *
+ * Return: Pointer to the destination buffer.
+ */
+char *string_concat(char *destination, const char *source)
+{
+	char *retur = destination;
+
+	while (*destination)
+		destination++;
+
+	while (*source)
+		*destination++ = *source++;
+
+	*destination = *source;
+
+	return (retur);
+}
+
+/**
+ * string_length - Returns the length of a string.                   
+ * @str: The input string whose length to check.
+ *
+ * Return: Integer length of the string.
+ */
+int string_length(const char *str)
+{
+	int len = 0;
+
+	if (!str)
+		return (0);
+
+	while (*str++)
+		len++;
+
+	return (len);
+}
+/**
+ * string_copy - Copies a string.                       
+ * @destination: The destination string.
+ * @source: The source string.
+ *
+ * Return: Pointer to the destination string.
+ */
+char *string_copy(char *destination, const char *source)
+{
+	int a = 0;
+
+	if (destination == source || source == NULL)
+		return (destination);
+
+	while (source[a])
+	{
+		destination[a] = source[a];
+		i++;
+	}
+
+	destination[a] = '\0';
+	return (destination);
+}
+
+/**
+ * string_duplicate - Duplicates a string.                        
+ * @str: The string to duplicate.
+ *
+ * Return: Pointer to the duplicated string, or NULL on failure.
+ */
+char *string_duplicate(const char *str)
+{
+	int len = 0;
+	char *retur;
+
+	if (str == NULL)
+		return (NULL);
+
+	while (*str++)
+		len++;
+
+	retur = malloc(sizeof(char) * (len + 1));
+	if (!retur)
+		return (NULL);
+
+	for (leng++; len--;)
+		retur[len] = *--str;
+
+	return (retur);
+}
+/**
+ * string_starts_with - Checks if the str_missing starts with the ndle.
+ * @str_missing: The string to search.
+ * @ndle: The substring to find.
+ *
+ * Return: Address of the next character of str_missing if found, or NULL.
+ */
+char *string_starts_with(const char *str_missing, const char *ndle)
+{
+	while (*ndle)
+		if (*ndle++ != *str_missing++)
+			return (NULL);
+
+	return ((char *)str_missing);
+}
+
+/**
+ * _puts - Prints an input string.
+ * @str: The string to be printed.
+ *
+ * Return: Nothing.
+ */
+void  _puts(const char *str)
+{
+	int a = 0;
+
+	if (!str)
+		return;
+
+	while (str[a] != '\0')
+	{
+		_putchar(str[a]);
+		a++;
+	}
+}
+
+/**
+ * _putchar  - Writes the character to the standard output.
+ * @chara: The character to print.
+ *
+ * Return: On success, 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char chara)
+{
+	static int a = 0;
+	static char buf[WRITE_BUF_SIZE];
+
+	if (chara == BUF_FLUSH || a >= WRITE_BUF_SIZE)
+	{
+		write(1, buf, a);
+		a = 0;
+	}
+
+	if (chara != BUF_FLUSH)
+		buf[a++] = chara;
+
+	return (1);
+}
+
